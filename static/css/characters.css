@@ -1,25 +1,45 @@
+body {
+  background: url("../img/new_background.jpg") 50% 50px no-repeat fixed;
+}
+nav {
+    position: sticky;
+}
 .content {
   width: 50%;
   margin: auto;
   margin-top: 50px;
   font-size: 20px;
   text-align: center;
-  /* border-color: #FFF; */
 }
 h1 {
   padding-bottom: 30px;
 }
 .btn-primary {
-  width: 400px;
+  width: 100%;
+}
+.card-body {
+  background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+}
+.form-group{
 }
 .found-result {
+  margin-top: 15px;
+  background-color: rgba(255, 255, 255, 0.5);
   border: 2px outset grey;
   border-radius: 20px;
 }
 .character-card {
+  max-width: 90%;
   max-height: 70%;
+  margin: 5%;
+  padding: 10px;
+  line-height: 10px;
   border: 1px double #1FAEE9;
   border-radius: 30px;
+}
+.character-card:hover {
+  background-color: rgba(200, 200, 200, 0.5);
 }
 /* .character-picture-block {
   width: 300px;
@@ -36,5 +56,3 @@ h1 {
   position: relative;
   object-fit: cover;
 } */
-.character-info {
-}

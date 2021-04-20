@@ -27,19 +27,18 @@
 </div>
 <div class="found-result">
   {% if not characters_list %}
-    <p>No result</p>
+    <p style="padding:10px">No result</p>
   {% else %}
     {% for character in characters_list %}
-    <div class="character-card" style=''>
+    <div class="character-card">
       <!-- <div class="character-picture-block"></div> -->
       <div class="character-info">
-        {% for key, value in character.items() %}
-          {% if key == 'Name' %}
-            <h3>Name: {{ value }}</h3>
-          {% else %}
+      <h2><a href="{{ character['wikiUrl'] }}" target="blank">{{ character["name"] }}</a></h2>
+      {% for key, value in character.items() %}
+          {% if key != "name" and key != "_id" and key != "wikiUrl" and value %}
             <p>{{ key.capitalize() }}: {{ value }}</p>
           {% endif %}
-        {% endfor %}
+      {% endfor %}
       </div>
     </div>
     {% endfor %}

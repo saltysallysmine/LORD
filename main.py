@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request
+from flask import Flask, render_template, url_for, request, redirect
 from pprint import pprint
 import lord_api
 import json
@@ -22,31 +22,50 @@ def index_page():
     return render_template('index.html', **html_keys)
 
 
+@app.route('/error')
+def error_page():
+    html_keys = {
+        'title': 'Error',
+        'css_url': url_for('static', filename='/css/characters.css'),
+        'message': "Something go wrong!"
+    }
+    return render_template('base.html', **html_keys)
+
+
 @app.route('/characters', methods=['GET', 'POST'])
 def characters_page():
     html_keys = {
         'title': 'Characters',
         'css_url': url_for('static', filename='/css/characters.css')
     }
-
-    if request.method == 'GET':
-        # characters_params
-        with open('../characters_params.json', 'r', encoding='utf-8') as fp:
-            characters_params = json.load(fp)
-        descriptions = {}()
+    # characters_params
+    with open('../characters_params.json', 'r', encoding='utf-8') as fp:
+        characters_params = json.load(fp)
+        descriptions = {}
         for key, value in characters_params.items():
             descriptions[key] = value
-        html_keys['descriptions'] = descriptions
+            html_keys['descriptions'] = descriptions
+
+    if request.method == 'GET':
         return render_template('characters.html', **html_keys)
 
     if request.method == 'POST':
-        pprint(request.form)
+        try:
+            d = {}
+            for key, value in request.form.items():
+                if value:
+                    d[key] = value
+            html_keys['characters_list'] = lord_api.get_character(d)['docs']
+            # pprint(html_keys)
+        except Exception as e:
+            pprint(e)
         return render_template('characters.html', **html_keys)
 
+
 if __name__ == "__main__":
-    app.run()
     lord_api.set_consts({
         'API_KEY': API_KEY,
         'MAIN_URL': MAIN_URL
     })
+    app.run()
     # pprint(lord_api.get_character())

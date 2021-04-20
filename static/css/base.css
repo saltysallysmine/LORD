@@ -1,3 +1,6 @@
+body {
+  background: url("../img/new_background.jpg") 50% 50px no-repeat fixed;
+}
 .content {
   width: 50%;
   margin: auto;

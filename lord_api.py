@@ -1,7 +1,7 @@
 import requests
 
 API_KEY = None
-MAIN_URL = None
+MAIN_URL = ''
 headers = None
 
 
@@ -14,9 +14,14 @@ def set_consts(d: dict):
     }
 
 
-def get_character(params={}):
+def get_character(params=None):
+    if params is None:
+        params = {}
+    # print(MAIN_URL)
     return requests.get(MAIN_URL + 'character', headers=headers,
-           params=params).json()
+                        params=params).json()
+
 
 if __name__ == "__main__":
+    # get_character({'gender': 'Males', 'hair': 'Brown (movie)', 'realm': 'Doors of Durin'})
     pass
