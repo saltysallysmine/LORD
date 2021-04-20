@@ -1,0 +1,40 @@
+.content {
+  width: 50%;
+  margin: auto;
+  margin-top: 50px;
+  font-size: 20px;
+  text-align: center;
+  /* border-color: #FFF; */
+}
+h1 {
+  padding-bottom: 30px;
+}
+.btn-primary {
+  width: 400px;
+}
+.found-result {
+  border: 2px outset grey;
+  border-radius: 20px;
+}
+.character-card {
+  max-height: 70%;
+  border: 1px double #1FAEE9;
+  border-radius: 30px;
+}
+/* .character-picture-block {
+  width: 300px;
+  height: 300px;
+  max-width: 300px;
+  max-height: 300px;
+  outline: 2px double #000000;
+  overflow: hidden;
+  background-image: url("C:/Users/Владелец/sorry its mine/slet/am i need it/ЯЛ/web/to_git/static/img/gandalf.jpg");
+  background-position: center;
+  background-size: cover;
+}
+.character-picture {
+  position: relative;
+  object-fit: cover;
+} */
+.character-info {
+}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Characters</h1>
+
+  <p>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      Filters
+    </button>
+  </p>
+  <div class="collapse" id="collapseExample">
+    <div class="card card-body">
+      <form class="search-from" method="post">
+        {% for characteristics, params in descriptions.items() %}
+        <div class="form-group">
+                <label for="classSelect">{{ characteristics }}</label>
+                <select class="form-control" id="classSelect" name='{{ characteristics }}'>
+                    {% for item in params %}
+                    <option>{{ item }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Apply</button>
+        </form>
+    </div>
+</div>
+<div class="found-result">
+  {% if not characters_list %}
+    <p>No result</p>
+  {% else %}
+    {% for character in characters_list %}
+    <div class="character-card" style=''>
+      <!-- <div class="character-picture-block"></div> -->
+      <div class="character-info">
+        {% for key, value in character.items() %}
+          {% if key == 'Name' %}
+            <h3>Name: {{ value }}</h3>
+          {% else %}
+            <p>{{ key.capitalize() }}: {{ value }}</p>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  {% endif %}
+</div>
+{% endblock %}
