@@ -1,0 +1,24 @@
+/* base content */
+body {
+  background: url("../img/new_background.jpg") 50% 50px no-repeat fixed;
+}
+nav {
+    position: sticky;
+}
+.content {
+  width: 50%;
+  margin: auto;
+  margin-top: 50px;
+  font-size: 20px;
+  text-align: center;
+}
+h1 {
+  padding-bottom: 30px;
+}
+/* additional content */
+.movies-content-block {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  width: 100%;
+}
+

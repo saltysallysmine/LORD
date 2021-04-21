@@ -62,10 +62,31 @@ def characters_page():
         return render_template('characters.html', **html_keys)
 
 
+@app.route('/books')
+def books():
+    html_keys = {
+        'title': 'Books',
+        'css_url': url_for('static', filename='/css/books.css')
+    }
+    return render_template('books.html', **html_keys)
+
+
+@app.route('/movies')
+def movies():
+    html_keys = {
+        'title': 'movies',
+        'css_url': url_for('static', filename='/css/movies.css'),
+        'movies_list': lord_api.get_movies()['docs']
+    }
+    return render_template('movies.html', **html_keys)
+
+
 if __name__ == "__main__":
     lord_api.set_consts({
         'API_KEY': API_KEY,
         'MAIN_URL': MAIN_URL
     })
-    app.run()
     # pprint(lord_api.get_character())
+    # pprint(lord_api.get_books())
+    # pprint(lord_api.get_movies())
+    app.run()

@@ -15,11 +15,22 @@ def set_consts(d: dict):
 
 
 def get_character(params=None):
+    global headers
     if params is None:
         params = {}
     # print(MAIN_URL)
     return requests.get(MAIN_URL + 'character', headers=headers,
                         params=params).json()
+
+
+def get_books():
+    global headers
+    return requests.get(MAIN_URL + 'book', headers=headers).json()
+
+
+def get_movies():
+    global headers
+    return requests.get(MAIN_URL + 'movie', headers=headers).json()
 
 
 if __name__ == "__main__":

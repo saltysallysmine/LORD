@@ -1,3 +1,4 @@
+/* base content */
 body {
   background: url("../img/new_background.jpg") 50% 50px no-repeat fixed;
 }
@@ -14,6 +15,7 @@ nav {
 h1 {
   padding-bottom: 30px;
 }
+/* additional content */
 .btn-toggle {
   background-color: rgba(69, 177, 232, 0.9);
   border-color: rgba(69, 177, 232, 0.9);
@@ -28,7 +30,7 @@ h1 {
 }
 .card-body {
   background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 20px;
+  border-radius: 20px;
 }
 .form-group{
 }
