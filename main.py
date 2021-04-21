@@ -88,5 +88,5 @@ if __name__ == "__main__":
     })
     # pprint(lord_api.get_character())
     # pprint(lord_api.get_books())
-    # pprint(lord_api.get_movies())
+    # pprint(lord_api.get_movies()['docs'][0])
     app.run()

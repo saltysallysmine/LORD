@@ -4,6 +4,30 @@
     <h1>Books</h1>
 
     <div class="movies-content-block">
-
+        {% for movie in movies_list %}
+            <div class="card">
+              <img class="card-img-top" src="..." alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">{{ movie.get('name', 'Something go wrong :(') }}</h5>
+                <div class="card-text">
+                    {% for key, value in movie.items() %}
+                        {% if key != 'name' and key != '_id' %}
+                            <p>{{ key }}: {{ value }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <a href="#" class="btn btn-primary">Переход куда-нибудь</a>
+              </div>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}
+
+<!--{'_id': '5cd95395de30eff6ebccde56',-->
+<!-- 'academyAwardNominations': 30,-->
+<!-- 'academyAwardWins': 17,-->
+<!-- 'boxOfficeRevenueInMillions': 2917,-->
+<!-- 'budgetInMillions': 281,-->
+<!-- 'name': 'The Lord of the Rings Series',-->
+<!-- 'rottenTomatesScore': 94,-->
+<!-- 'runtimeInMinutes': 558}-->
