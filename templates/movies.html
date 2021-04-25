@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Books</h1>
+    <h1>Movies</h1>
 
     <div class="movies-content-block">
         {% for movie in movies_list %}
             <div class="card">
-              <img class="card-img-top" src="..." alt="Card image cap">
+              <img class="card-img-top" src="{{ posters_src_list[loop.index0] }}" alt="Card image cap">
               <div class="card-body">
                 <h5 class="card-title">{{ movie.get('name', 'Something go wrong :(') }}</h5>
                 <div class="card-text">
@@ -16,7 +16,7 @@
                         {% endif %}
                     {% endfor %}
                 </div>
-                <a href="#" class="btn btn-primary">Переход куда-нибудь</a>
+                <a href="#" class="btn btn-primary">Search it on wiki</a>
               </div>
             </div>
         {% endfor %}

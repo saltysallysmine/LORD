@@ -1,13 +1,15 @@
 from flask import Flask, render_template, url_for, request, redirect
 from pprint import pprint
+import google_search_api
 import lord_api
 import json
 
 # consts
 with open('../keys.json', 'r', encoding='utf-8') as fp:
     secret_data = json.load(fp)
-API_KEY = secret_data['api_key']
-MAIN_URL = 'https://the-one-api.dev/v2/'
+LORD_API_KEY = secret_data['lord_api_key']
+GOOGLE_API_KEY = secret_data['google_api_key']
+CX = secret_data['cx']
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = secret_data['app_secret_key']
@@ -78,13 +80,22 @@ def movies():
         'css_url': url_for('static', filename='/css/movies.css'),
         'movies_list': lord_api.get_movies()['docs']
     }
+    # pprint(html_keys['movies_list'])
+    src_base = '../static/img/movies_poster/'
+    posters_src_list = []
+    for movie in html_keys['movies_list']:
+        posters_src_list.append(src_base + movie['name'].rstrip() + '.jpg')
+    html_keys['posters_src_list'] = posters_src_list
     return render_template('movies.html', **html_keys)
 
 
 if __name__ == "__main__":
     lord_api.set_consts({
-        'API_KEY': API_KEY,
-        'MAIN_URL': MAIN_URL
+        'LORD_API_KEY': LORD_API_KEY,
+    })
+    google_search_api.set_consts({
+        'GOOGLE_API_KEY': GOOGLE_API_KEY,
+        'CX': CX
     })
     # pprint(lord_api.get_character())
     # pprint(lord_api.get_books())

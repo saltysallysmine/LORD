@@ -6,7 +6,7 @@ nav {
     position: sticky;
 }
 .content {
-  width: 50%;
+  width: 70%;
   margin: auto;
   margin-top: 50px;
   font-size: 20px;
@@ -30,5 +30,8 @@ h1 {
   margin: 2%;
   margin-bottom: 10px;
   line-height: 20px;
+}
+.card-img-top {
+    max-height: 500px;
 }
 

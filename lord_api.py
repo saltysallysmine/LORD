@@ -1,16 +1,15 @@
 import requests
 
-API_KEY = None
-MAIN_URL = ''
+LORD_API_KEY = None
+MAIN_URL = 'https://the-one-api.dev/v2/'
 headers = None
 
 
 def set_consts(d: dict):
-    global API_KEY, MAIN_URL, headers
-    API_KEY = d['API_KEY']
-    MAIN_URL = d['MAIN_URL']
+    global LORD_API_KEY, MAIN_URL, headers
+    LORD_API_KEY = d['LORD_API_KEY']
     headers = {
-        'Authorization': "Bearer " + API_KEY
+        'Authorization': "Bearer " + LORD_API_KEY
     }
 
 
