@@ -3,6 +3,10 @@ from pprint import pprint
 import google_search_api
 import lord_api
 import json
+import logging
+
+# logging
+logging.basicConfig(filename='lord_logging.log', level=logging.INFO)
 
 # consts
 with open('../keys.json', 'r', encoding='utf-8') as fp:
@@ -21,6 +25,7 @@ def index_page():
         'title': 'LORD',
         'css_url': url_for('static', filename='/css/base.css')
     }
+    logging.info('get index')
     return render_template('index.html', **html_keys)
 
 
@@ -49,6 +54,7 @@ def characters_page():
             html_keys['descriptions'] = descriptions
 
     if request.method == 'GET':
+        logging.info('get characters page')
         return render_template('characters.html', **html_keys)
 
     if request.method == 'POST':
@@ -58,9 +64,11 @@ def characters_page():
                 if value:
                     d[key] = value
             html_keys['characters_list'] = lord_api.get_character(d)['docs']
+            logging.info('post characters page')
             # pprint(html_keys)
         except Exception as e:
-            pprint(e)
+            logging.error('characters page: ' + str(e))
+            redirect('/error')
         return render_template('characters.html', **html_keys)
 
 
@@ -70,6 +78,7 @@ def books():
         'title': 'Books',
         'css_url': url_for('static', filename='/css/books.css')
     }
+    logging.info('get books page')
     return render_template('books.html', **html_keys)
 
 
@@ -80,13 +89,17 @@ def movies():
         'css_url': url_for('static', filename='/css/movies.css'),
         'movies_list': lord_api.get_movies()['docs']
     }
-    # pprint(html_keys['movies_list'])
     src_base = '../static/img/movies_poster/'
     posters_src_list = []
     for movie in html_keys['movies_list']:
         posters_src_list.append(src_base + movie['name'].rstrip() + '.jpg')
-    html_keys['posters_src_list'] = posters_src_list
-    return render_template('movies.html', **html_keys)
+    try:
+        html_keys['posters_src_list'] = posters_src_list
+        logging.info('get movies page')
+        return render_template('movies.html', **html_keys)
+    except Exception as e:
+        logging.error('movies page: ' + str(e))
+        redirect('/error')
 
 
 if __name__ == "__main__":
