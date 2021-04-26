@@ -91,12 +91,16 @@ def movies():
     }
     src_base = '../static/img/movies_poster/'
     posters_src_list = []
-    for movie in html_keys['movies_list']:
-        posters_src_list.append(src_base + movie['name'].rstrip() + '.jpg')
+    wiki_url_list = []
     try:
+        for movie in html_keys['movies_list']:
+            cur_name = movie['name'].rstrip()
+            posters_src_list.append(src_base + cur_name + '.jpg')
+            wiki_url_list.append(google_search_api.search_for(f'movie {cur_name}'))
         html_keys['posters_src_list'] = posters_src_list
         logging.info('get movies page')
         return render_template('movies.html', **html_keys)
+    # error
     except Exception as e:
         logging.error('movies page: ' + str(e))
         redirect('/error')

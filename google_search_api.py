@@ -13,13 +13,15 @@ def set_consts(d: dict):
     CX = d['CX']
     params = {
         'key': GOOGLE_API_KEY,
-         'cx': CX
+        'cx': CX
     }
 
 
 def search_for(query):
     global MAIN_URL, params
     params['q'] = query
+    # ans = requests.get(MAIN_URL, params=params).json()['items'][0]
+    # return ans['formattedUrl'], ans['htmlSnippet']
     return requests.get(MAIN_URL, params=params).json()
 
 
