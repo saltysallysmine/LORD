@@ -1,6 +1,7 @@
 from flask import Flask, render_template, url_for, request, redirect
 from pprint import pprint
 import google_search_api
+from google_search_api import GoogleSearcher
 import lord_api
 import json
 import logging
@@ -92,12 +93,30 @@ def movies():
     src_base = '../static/img/movies_poster/'
     posters_src_list = []
     wiki_url_list = []
+    wiki_snippet_list = []
+    found_results_from_google = GoogleSearcher()
     try:
         for movie in html_keys['movies_list']:
             cur_name = movie['name'].rstrip()
+            # way to posters images
             posters_src_list.append(src_base + cur_name + '.jpg')
-            wiki_url_list.append(google_search_api.search_for(f'movie {cur_name}'))
+            # found film info in google
+            found_results_from_google.search_for(f'movie {cur_name}')
+            wiki_url_list.append(found_results_from_google.get_url())
+            # snippet
+            cur_snippet = str(found_results_from_google.get_snippet()) \
+                .replace('<b>', '') \
+                .replace('</b>', '') \
+                .replace('<br>', '') \
+                .replace('&nbsp;', '')
+            wiki_snippet_list.append(cur_snippet)
         html_keys['posters_src_list'] = posters_src_list
+        html_keys['wiki_url_list'] = wiki_url_list
+        html_keys['wiki_snippet_list'] = wiki_snippet_list
+
+        # pprint(wiki_url_list)
+        # pprint(wiki_snippet_list)
+
         logging.info('get movies page')
         return render_template('movies.html', **html_keys)
     # error

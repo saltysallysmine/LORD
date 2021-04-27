@@ -11,11 +11,17 @@ class GoogleSearcher:
     def __init__(self):
         self.response = None
 
-    def search(self, query):
+    def search_for(self, query):
         global MAIN_URL, params
         params['q'] = query
         # return ans[], ans[']
-        self.response = requests.get(MAIN_URL, params=params).json()['items'][0]
+        try:
+            self.response = requests.get(MAIN_URL, params=params).json()['items'][0]
+        except Exception:
+            self.response = {
+                'formattedUrl': f'https://www.google.ru/search?q={query}',
+                'htmlSnippet': 'You can try to find information about it on wiki'
+            }
 
     def get_url(self):
         if self.response:

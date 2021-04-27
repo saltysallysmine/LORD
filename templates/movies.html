@@ -1,26 +1,38 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Movies</h1>
+<h1>Movies</h1>
 
-    <div class="movies-content-block">
-        {% for movie in movies_list %}
-            <div class="card">
-              <img class="card-img-top" src="{{ posters_src_list[loop.index0] }}" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">{{ movie.get('name', 'Something go wrong :(') }}</h5>
+<div class="movies-content-block">
+    {% for movie in movies_list %}
+    <div class="card">
+        <h3 class="card-title">{{ movie.get('name', 'Something go wrong :(') }}</h3>
+        <img class="card-img-top" src="{{ posters_src_list[loop.index0] }}" alt="Card image cap">
+        <button class="btn btn-primary btn-collapse" type="button" data-toggle="collapse" data-target="#collapseExample{{ loop.index0 }}"
+                aria-expanded="false" aria-controls="collapseExample">
+            Information
+        </button>
+        <div class="collapse" id="collapseExample{{ loop.index0 }}">
+            <div class="card-body">
+                <!--                <h5 class="card-title">{{ movie.get('name', 'Something go wrong :(') }}</h5>-->
                 <div class="card-text">
-                    {% for key, value in movie.items() %}
-                        {% if key != 'name' and key != '_id' %}
-                            <p>{{ key }}: {{ value }}</p>
-                        {% endif %}
-                    {% endfor %}
+                    <div class="card-text-snippet">
+                        {{ wiki_snippet_list[loop.index0] }}
+                    </div>
+                    <div class="card-text-info">
+                        {% for key, value in movie.items() %}
+                            {% if key != 'name' and key != '_id' %}
+                                <p>{{ key }}: {{ value }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
-                <a href="#" class="btn btn-primary">Search it on wiki</a>
-              </div>
+                <a href="{{ wiki_url_list[loop.index0] }}" class="btn btn-light btn-search" target="_blank" >Search it on wiki</a>
             </div>
-        {% endfor %}
+        </div>
     </div>
+    {% endfor %}
+</div>
 {% endblock %}
 
 <!--{'_id': '5cd95395de30eff6ebccde56',-->

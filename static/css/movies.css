@@ -22,6 +22,18 @@ h1 {
   width: 100%;
   padding-top: 2px;
 }
+.btn-collapse {
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(69, 177, 232, 0.9);
+    border-color: rgba(69, 177, 232, 0.9);
+}
+.btn-collapse:hover {
+  background-color: rgba(29, 147, 212, 0.9);
+  border-color: rgba(29, 147, 212, 0.9);
+}
 .card {
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 20px;
@@ -30,8 +42,39 @@ h1 {
   margin: 2%;
   margin-bottom: 10px;
   line-height: 20px;
+  padding-top: 10px;
+  padding-bottom 10px;
+}
+.card:hover {
+  background-color: rgba(180, 241, 244, 0.5);
+}
+.card-title {
+    /* margin-top: 10px; */
 }
 .card-img-top {
     max-height: 500px;
+    width: 90%;
+    margin-left: 5%;
+    border-radius: 20px;
+}
+.card-body {
+    width: 90%;
+    margin-left: 5%;
+}
+.card-text-snippet {
+    width: 45%;
+    float: left;
+    text-align: left;
+    /* border: 1px solid black; */
+}
+.card-text-info {
+    width: 45%;
+    margin-left: 55%;
+    /* border: 1px solid black; */
+}
+.btn-search {
+    width: 90%;
+    background-color: rgba(240, 240, 240, 0.9);
+    border-color: rgba(240, 240, 240, 0.9);
 }
 
