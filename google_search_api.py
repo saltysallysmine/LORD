@@ -7,6 +7,25 @@ MAIN_URL = 'https://www.googleapis.com/customsearch/v1'
 params = {}
 
 
+class GoogleSearcher:
+    def __init__(self):
+        self.response = None
+
+    def search(self, query):
+        global MAIN_URL, params
+        params['q'] = query
+        # return ans[], ans[']
+        self.response = requests.get(MAIN_URL, params=params).json()['items'][0]
+
+    def get_url(self):
+        if self.response:
+            return self.response.get('formattedUrl', "#")
+
+    def get_snippet(self):
+        if self.response:
+            return self.response.get('htmlSnippet', '')
+
+
 def set_consts(d: dict):
     global GOOGLE_API_KEY, MAIN_URL, CX, params
     GOOGLE_API_KEY = d['GOOGLE_API_KEY']
@@ -17,11 +36,9 @@ def set_consts(d: dict):
     }
 
 
-def search_for(query):
+def search_for(query) -> dict:
     global MAIN_URL, params
     params['q'] = query
-    # ans = requests.get(MAIN_URL, params=params).json()['items'][0]
-    # return ans['formattedUrl'], ans['htmlSnippet']
     return requests.get(MAIN_URL, params=params).json()
 
 
