@@ -35,7 +35,7 @@ def error_page():
     html_keys = {
         'title': 'Error',
         'css_url': url_for('static', filename='/css/characters.css'),
-        'message': "Something go wrong!"
+        'message': "Something go wrong! We`re trying to fix your problem. Check the desired page after."
     }
     return render_template('base.html', **html_keys)
 
@@ -90,6 +90,8 @@ def movies():
         'css_url': url_for('static', filename='/css/movies.css'),
         'movies_list': lord_api.get_movies()['docs']
     }
+    if html_keys['movies_list'] is None:
+        redirect('/error')
     src_base = '../static/img/movies_poster/'
     posters_src_list = []
     wiki_url_list = []

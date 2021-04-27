@@ -18,8 +18,14 @@ def get_character(params=None):
     if params is None:
         params = {}
     # print(MAIN_URL)
-    return requests.get(MAIN_URL + 'character', headers=headers,
-                        params=params).json()
+    try:
+        return requests.get(MAIN_URL + 'character', headers=headers,
+                            params=params).json()
+    except Exception:
+        # print(e)
+        # print(requests.get(MAIN_URL + 'character', headers=headers,
+        #              params=params).json())
+        return None
 
 
 def get_books():

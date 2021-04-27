@@ -20,11 +20,12 @@
                         {{ wiki_snippet_list[loop.index0] }}
                     </div>
                     <div class="card-text-info">
-                        {% for key, value in movie.items() %}
-                            {% if key != 'name' and key != '_id' %}
-                                <p>{{ key }}: {{ value }}</p>
-                            {% endif %}
-                        {% endfor %}
+                        <p>Runtime: {{ movie['runtimeInMinutes'] }} minutes</p>
+                        <p>Budget: ${{ movie['budgetInMillions'] }} millions</p>
+                        <p>Box office revenue: ${{ movie['boxOfficeRevenueInMillions'] }} millions</p>
+                        <p>Academy award nominations: {{ movie['academyAwardNominations'] }}</p>
+                        <p>Academy award wins: {{ movie['academyAwardWins'] }}</p>
+                        <p>Rotten Tomates score: {{ movie['rottenTomatesScore'] }}</p>
                     </div>
                 </div>
                 <a href="{{ wiki_url_list[loop.index0] }}" class="btn btn-light btn-search" target="_blank" >Search it on wiki</a>

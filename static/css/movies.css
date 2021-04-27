@@ -65,12 +65,23 @@ h1 {
     width: 45%;
     float: left;
     text-align: left;
+    font-weight: bold;
     /* border: 1px solid black; */
 }
 .card-text-info {
     width: 45%;
     margin-left: 55%;
+    text-align: left;
+    font-size: 18px;
+    line-height: 16px;
     /* border: 1px solid black; */
+}
+.card-text-info p:hover {
+    padding-left: 7px;
+    font-weight: bold;
+}
+.card-text-info p:nth-child(odd) {
+    color: rgba(155, 0, 255, 1);
 }
 .btn-search {
     width: 90%;
