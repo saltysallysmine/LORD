@@ -16,3 +16,17 @@ h1 {
   padding-bottom: 30px;
 }
 /* additional content */
+.card-img-top-block {
+    float: left;
+    width: 30%;
+    margin-left: 5%;
+    border-radius: 20px;
+}
+.card-body {
+    width: 40%;
+}
+.btn-search {
+    width: 90%;
+    background-color: rgba(240, 240, 240, 0.9);
+    border-color: rgba(240, 240, 240, 0.9);
+}

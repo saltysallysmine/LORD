@@ -7,13 +7,13 @@
     {% for book in books_list %}
     <div class="card">
         <h3 class="card-title">{{ book.get('name', 'Something go wrong :(') }}</h3>
-        <img class="card-img-top" src="{{ posters_src_list[loop.index0] }}" alt="Card image cap">
+        <div class="card-img-top-block">
+            <img class="card-img-top" src="{{ posters_src_list[loop.index0] }}" alt="Card image cap">
+        </div>
             <div class="card-body">
-                <div class="card-text">
                     <div class="card-text-snippet">
                         {{ books_snippet_list[loop.index0] }}
                     </div>
-                </div>
                 <a href="{{ wiki_url_list[loop.index0] }}" class="btn btn-light btn-search" target="_blank" >Search it on wiki</a>
             </div>
     </div>
