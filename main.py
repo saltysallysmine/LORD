@@ -69,7 +69,7 @@ def characters_page():
             # pprint(html_keys)
         except Exception as e:
             logging.error('characters page: ' + str(e))
-            redirect('/error')
+            return redirect('/error')
         return render_template('characters.html', **html_keys)
 
 
@@ -78,24 +78,32 @@ def books():
     html_keys = {
         'title': 'Books',
         'css_url': url_for('static', filename='/css/books.css'),
-        'books_list': lord_api.get_books()['docs']
     }
-    if html_keys['books_list'] is None:
+    lord_api_response = lord_api.get_books()
+    if lord_api_response is None:
         logging.error('books_list is None')
-        redirect('/error')
+        return redirect('/error')
+    else:
+        html_keys['books_list'] = lord_api_response['docs']
     # pprint(html_keys['books_list'])
 
-    src_base = '../static/img/movies_poster/'
+    src_base = '../static/img/books_covers/'
     posters_src_list = []
+    wiki_url_list = []
+    found_results_from_google = GoogleSearcher()
     for book in html_keys['books_list']:
         cur_name = book['name'].rstrip()
-        # way to posters images
+        # way to cover images
         posters_src_list.append(src_base + cur_name + '.jpg')
+        found_results_from_google.search_for(f'movie {cur_name}')
+        wiki_url_list.append(found_results_from_google.get_url())
 
-    books_snippet_list = [str(i) for i in range(3)]
+    with open('static/json/books_snippets.json', 'r', encoding='utf-8') as fp:
+        books_snippet_list = json.load(fp)
 
     html_keys['posters_src_list'] = posters_src_list
     html_keys['books_snippet_list'] = books_snippet_list
+    html_keys['wiki_url_list'] = wiki_url_list
 
     logging.info('get books page')
     return render_template('books.html', **html_keys)
@@ -106,11 +114,13 @@ def movies():
     html_keys = {
         'title': 'movies',
         'css_url': url_for('static', filename='/css/movies.css'),
-        'movies_list': lord_api.get_movies()['docs']
     }
-    if html_keys['movies_list'] is None:
+    lord_api_response = lord_api.get_movies()
+    if lord_api_response is None:
         logging.error('movies_list is None')
-        redirect('/error')
+        return redirect('/error')
+    else:
+        html_keys['movies_list'] = lord_api.get_movies()['docs']
     src_base = '../static/img/movies_poster/'
     posters_src_list = []
     wiki_url_list = []
@@ -143,7 +153,7 @@ def movies():
     # error
     except Exception as e:
         logging.error('movies page: ' + str(e))
-        redirect('/error')
+        return redirect('/error')
 
 
 if __name__ == "__main__":
