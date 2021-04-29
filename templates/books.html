@@ -1,5 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Books</h1>
+<h1>Books</h1>
+
+<div class="books-content-block">
+    {% for book in books_list %}
+    <div class="card">
+        <h3 class="card-title">{{ book.get('name', 'Something go wrong :(') }}</h3>
+        <img class="card-img-top" src="{{ posters_src_list[loop.index0] }}" alt="Card image cap">
+            <div class="card-body">
+                <!--                <h5 class="card-title">{{ movie.get('name', 'Something go wrong :(') }}</h5>-->
+                <div class="card-text">
+                    <div class="card-text-snippet">
+                        {{ books_snippet_list[loop.index0] }}
+                    </div>
+                </div>
+                <a href="{{ wiki_url_list[loop.index0] }}" class="btn btn-light btn-search" target="_blank" >Search it on wiki</a>
+            </div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}
+
+<!--{'_id': '5cd95395de30eff6ebccde56',-->
+<!-- 'academyAwardNominations': 30,-->
+<!-- 'academyAwardWins': 17,-->
+<!-- 'boxOfficeRevenueInMillions': 2917,-->
+<!-- 'budgetInMillions': 281,-->
+<!-- 'name': 'The Lord of the Rings Series',-->
+<!-- 'rottenTomatesScore': 94,-->
+<!-- 'runtimeInMinutes': 558}-->

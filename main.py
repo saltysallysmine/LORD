@@ -47,12 +47,12 @@ def characters_page():
         'css_url': url_for('static', filename='/css/characters.css')
     }
     # characters_params
-    with open('../characters_params.json', 'r', encoding='utf-8') as fp:
+    with open('static/json/characters_params.json', 'r', encoding='utf-8') as fp:
         characters_params = json.load(fp)
         descriptions = {}
         for key, value in characters_params.items():
             descriptions[key] = value
-            html_keys['descriptions'] = descriptions
+        html_keys['descriptions'] = descriptions
 
     if request.method == 'GET':
         logging.info('get characters page')
@@ -77,8 +77,26 @@ def characters_page():
 def books():
     html_keys = {
         'title': 'Books',
-        'css_url': url_for('static', filename='/css/books.css')
+        'css_url': url_for('static', filename='/css/books.css'),
+        'books_list': lord_api.get_books()['docs']
     }
+    if html_keys['books_list'] is None:
+        logging.error('books_list is None')
+        redirect('/error')
+    # pprint(html_keys['books_list'])
+
+    src_base = '../static/img/movies_poster/'
+    posters_src_list = []
+    for book in html_keys['books_list']:
+        cur_name = book['name'].rstrip()
+        # way to posters images
+        posters_src_list.append(src_base + cur_name + '.jpg')
+
+    books_snippet_list = [str(i) for i in range(3)]
+
+    html_keys['posters_src_list'] = posters_src_list
+    html_keys['books_snippet_list'] = books_snippet_list
+
     logging.info('get books page')
     return render_template('books.html', **html_keys)
 
@@ -91,6 +109,7 @@ def movies():
         'movies_list': lord_api.get_movies()['docs']
     }
     if html_keys['movies_list'] is None:
+        logging.error('movies_list is None')
         redirect('/error')
     src_base = '../static/img/movies_poster/'
     posters_src_list = []

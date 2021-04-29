@@ -30,12 +30,18 @@ def get_character(params=None):
 
 def get_books():
     global headers
-    return requests.get(MAIN_URL + 'book', headers=headers).json()
+    try:
+        return requests.get(MAIN_URL + 'book', headers=headers).json()
+    except Exception:
+        return None
 
 
 def get_movies():
     global headers
-    return requests.get(MAIN_URL + 'movie', headers=headers).json()
+    try:
+        return requests.get(MAIN_URL + 'movie', headers=headers).json()
+    except Exception:
+        return None
 
 
 if __name__ == "__main__":
