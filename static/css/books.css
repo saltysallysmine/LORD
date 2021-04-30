@@ -16,14 +16,35 @@ h1 {
   padding-bottom: 30px;
 }
 /* additional content */
+.card {
+    margin-bottom: 15px;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 90%;
+    margin-left: 5%;
+}
+.card:hover {
+  background-color: rgba(180, 241, 244, 0.5);
+}
+.books-content-block {
+    padding-top: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    width: 100%;
+    padding-top: 2px;
+}
 .card-img-top-block {
-    float: left;
-    width: 30%;
+    width: 90%;
     margin-left: 5%;
     border-radius: 20px;
 }
 .card-body {
-    width: 40%;
+    width: 90%;
+    margin-left: 5%;
+}
+.card-text-snippet {
+    margin-bottom: 15px;
+    font-style: italic;
+    font-weight: bold;
 }
 .btn-search {
     width: 90%;

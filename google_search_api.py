@@ -16,8 +16,12 @@ class GoogleSearcher:
         params['q'] = query
         # return ans[], ans[']
         try:
+            # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            # q = 1 / 0
+            print(0)
             self.response = requests.get(MAIN_URL, params=params).json()['items'][0]
         except Exception:
+            print(1)
             self.response = {
                 'formattedUrl': f'https://www.google.ru/search?q={query}',
                 'htmlSnippet': 'You can try to find information about it on wiki'
