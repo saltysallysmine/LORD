@@ -18,7 +18,7 @@ class GoogleSearcher:
         try:
             # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             # q = 1 / 0
-            print(0)
+            # print(0)
             self.response = requests.get(MAIN_URL, params=params).json()['items'][0]
         except Exception:
             print(1)
